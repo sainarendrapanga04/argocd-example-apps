@@ -16,7 +16,7 @@ spec:
     spec:
       project: prod-project
       source:
-        repoURL: https://github.com/argoproj/argocd-example-apps.git
+        repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
         targetRevision: HEAD
         path: '{{path}}'
       destination:
