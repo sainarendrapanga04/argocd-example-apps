@@ -19,12 +19,14 @@ spec:
       project: platform-project
       source:
         repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
-        targetRevision: HEAD
+        targetRevision: master
         path: '{{path}}'
       destination:
-        server: https://dev-cluster
-        namespace: ns1
+        server: https://kubernetes.default.svc
+        namespace: dev-ns1
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
