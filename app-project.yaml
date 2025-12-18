@@ -15,9 +15,15 @@ spec:
     - server: https://kubernetes.default.svc
       namespace: dev-ns1
     - server: https://kubernetes.default.svc
+      namespace: dev-ns2
+    - server: https://kubernetes.default.svc
+      namespace: staging-ns1
+    - server: https://kubernetes.default.svc
       namespace: staging-ns2
     - server: https://kubernetes.default.svc
-      namespace: prod-ns3
+      namespace: prod-ns1
+    - server: https://kubernetes.default.svc
+      namespace: prod-ns2
 
   clusterResourceWhitelist:
     - group: argoproj.io
