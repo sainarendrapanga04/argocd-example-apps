@@ -1,30 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: payments-project
+  name: platform-project
   namespace: argocd
 spec:
-  description: Payments application project (managed by platform-root)
+  description: Single project controlling all envs
 
-  # Git repositories allowed for applications in this project
   sourceRepos:
-    - https://github.com/sainarendrapanga04/app-gitops.git
+    - "*"
 
-  # Allowed deployment destinations
   destinations:
-    - server: https://kubernetes.default.svc
-      namespace: payments-dev
-    - server: https://kubernetes.default.svc
-      namespace: payments-stg
-    - server: https://kubernetes.default.svc
-      namespace: payments-prod
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    - namespace: dev-*
+      server: https://kubernetes.default.svc
+    - namespace: staging-*
+      server: https://kubernetes.default.svc
+    - namespace: prod-*
+      server: https://kubernetes.default.svc
 
-  # Allow deploying all Kubernetes resources (tighten later if needed)
   clusterResourceWhitelist:
-    - group: "*"
-      kind: "*"
-
-  # Optional: allow all namespaced resources
-  namespaceResourceWhitelist:
     - group: "*"
       kind: "*"
