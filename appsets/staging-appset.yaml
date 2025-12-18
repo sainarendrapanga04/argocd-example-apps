@@ -8,21 +8,22 @@ spec:
     - list:
         elements:
           - app: app1
+            path: guestbook
           - app: app2
+            path: guestbook
+
   template:
     metadata:
       name: '{{app}}-staging'
-      labels:
-        env: staging
     spec:
       project: platform-project
       source:
         repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
         targetRevision: HEAD
-        path: guestbook
+        path: '{{path}}'
       destination:
-        server: https://kubernetes.default.svc
-        namespace: staging-ns2
+        server: https://staging-cluster
+        namespace: ns2
       syncPolicy:
         automated:
           prune: true
