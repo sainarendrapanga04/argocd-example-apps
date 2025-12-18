@@ -4,6 +4,8 @@ metadata:
   name: platform-project
   namespace: argocd
 spec:
+  description: Platform project for all environments
+
   sourceRepos:
     - https://github.com/sainarendrapanga04/argocd-example-apps.git
 
@@ -11,9 +13,9 @@ spec:
     - server: https://kubernetes.default.svc
       namespace: argocd
     - server: https://kubernetes.default.svc
-      namespace: ns1
+      namespace: dev-ns1
     - server: https://kubernetes.default.svc
-      namespace: ns2
+      namespace: staging-ns2
     - server: https://kubernetes.default.svc
       namespace: prod-ns3
 
