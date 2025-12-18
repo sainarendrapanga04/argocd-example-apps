@@ -9,6 +9,8 @@ spec:
         elements:
           - app: guestbook
             path: guestbook
+          - app: guestbook-dev2
+            path: guestbook
 
   template:
     metadata:
