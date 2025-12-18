@@ -4,20 +4,18 @@ metadata:
   name: platform-project
   namespace: argocd
 spec:
-  description: Single project controlling all envs
+  description: Central project for all environments
 
   sourceRepos:
-    - "*"
+    - https://github.com/sainarendrapanga04/argocd-example-apps.git
 
   destinations:
-    - namespace: argocd
-      server: https://kubernetes.default.svc
-    - namespace: dev-*
-      server: https://kubernetes.default.svc
-    - namespace: staging-*
-      server: https://kubernetes.default.svc
-    - namespace: prod-*
-      server: https://kubernetes.default.svc
+    - namespace: ns1
+      server: https://dev-cluster
+    - namespace: ns2
+      server: https://staging-cluster
+    - namespace: ns3
+      server: https://prod-cluster
 
   clusterResourceWhitelist:
     - group: "*"
