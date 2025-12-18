@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: staging-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - app: app1
+          - app: app2
+  template:
+    metadata:
+      name: '{{app}}-staging'
+      labels:
+        env: staging
+    spec:
+      project: platform-project
+      source:
+        repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
+        targetRevision: HEAD
+        path: guestbook
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: staging-ns2
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
