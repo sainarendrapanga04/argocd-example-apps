@@ -7,21 +7,22 @@ spec:
   generators:
     - list:
         elements:
-          - app: guestbook
-            path: guestbook
-
+          - app: app1
+          - app: app2
   template:
     metadata:
       name: '{{app}}-prod'
+      labels:
+        env: prod
     spec:
-      project: prod-project
+      project: platform-project
       source:
         repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
         targetRevision: HEAD
-        path: '{{path}}'
+        path: guestbook
       destination:
         server: https://kubernetes.default.svc
-        namespace: prod
+        namespace: prod-ns3
       syncPolicy:
         automated:
           prune: true
