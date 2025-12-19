@@ -8,8 +8,8 @@ spec:
 
   source:
     repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
-    targetRevision: HEAD
-    path: app-a/appsets
+    targetRevision: master
+    path: '*'
 
   destination:
     server: https://kubernetes.default.svc
