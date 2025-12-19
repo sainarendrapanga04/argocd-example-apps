@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: app-a
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"   # 👈 THIS FIXES EVERYTHING
+spec:
+  sourceRepos:
+    - https://github.com/sainarendrapanga04/argocd-example-apps.git
+
+  destinations:
+    - namespace: dev
+      server: https://kubernetes.default.svc
+    - namespace: stg
+      server: https://kubernetes.default.svc
+    - namespace: prod
+      server: https://kubernetes.default.svc
