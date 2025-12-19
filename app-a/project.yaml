@@ -4,12 +4,17 @@ metadata:
   name: app-a
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"   # 👈 THIS FIXES EVERYTHING
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   sourceRepos:
     - https://github.com/sainarendrapanga04/argocd-example-apps.git
 
   destinations:
+    # Parent / root apps
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+
+    # Workload namespaces
     - namespace: dev
       server: https://kubernetes.default.svc
     - namespace: stg
