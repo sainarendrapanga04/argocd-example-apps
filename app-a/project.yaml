@@ -6,11 +6,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
+  description: Project for app-a
+
   sourceRepos:
     - https://github.com/sainarendrapanga04/argocd-example-apps.git
 
   destinations:
-    # Parent / root apps
+    # Parent / control apps
     - namespace: argocd
       server: https://kubernetes.default.svc
 
@@ -21,3 +23,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: prod
       server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
