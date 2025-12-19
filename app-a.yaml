@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
     targetRevision: master
-    path: 'app-a/appsets/*'
+    path: 'app-a'
 
   destination:
     server: https://kubernetes.default.svc
