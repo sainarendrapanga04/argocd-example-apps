@@ -1,28 +1,34 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: dev-appset-a
+  name: app-a-envs
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
-        revision: HEAD
-        directories:
-          - path: app-a/appsets/*
+    - list:
+        elements:
+          - env: dev
+            namespace: dev
+            path: app-a/manifests/dev
+          - env: stg
+            namespace: stg
+            path: app-a/manifests/stg
+          - env: prod
+            namespace: prod
+            path: app-a/manifests/prod
 
   template:
     metadata:
-      name: dev-{{path.basename}}
+      name: app-a-{{env}}
     spec:
       project: app-a
       source:
         repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
-        targetRevision: HEAD
+        targetRevision: master
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: dev
+        namespace: '{{namespace}}'
       syncPolicy:
         automated:
           prune: true
