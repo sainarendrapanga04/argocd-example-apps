@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prod-appset-b
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
+        revision: HEAD
+        directories:
+          - path: app-b/appsets/*
+
+  template:
+    metadata:
+      name: prod-{{path.basename}}
+    spec:
+      project: app-b
+      source:
+        repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: prod
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
