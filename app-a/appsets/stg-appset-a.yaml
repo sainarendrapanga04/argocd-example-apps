@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
         revision: HEAD
         directories:
-          - path: app-a/appsets
+          - path: app-a/appsets/*
 
   template:
     metadata:
