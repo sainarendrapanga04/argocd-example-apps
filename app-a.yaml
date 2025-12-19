@@ -1,22 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
-kind: AppProject
+kind: Application
 metadata:
   name: app-a
   namespace: argocd
 spec:
-  description: Project for App A workloads
+  project: app-a
 
-  sourceRepos:
-    - '*'
+  source:
+    repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
+    targetRevision: HEAD
+    path: app-a/appsets
 
-  destinations:
-    - namespace: dev
-      server: https://kubernetes.default.svc
-    - namespace: stg
-      server: https://kubernetes.default.svc
-    - namespace: prod
-      server: https://kubernetes.default.svc
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
 
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
