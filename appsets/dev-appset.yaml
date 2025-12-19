@@ -8,27 +8,21 @@ spec:
     - list:
         elements:
           - app: app1
-            path: guestbook
-            namespace: dev-ns1
           - app: app2
-            path: guestbook
-            namespace: dev-ns2
 
   template:
     metadata:
-      name: '{{app}}-dev'
+      name: dev-{{app}}
     spec:
-      project: platform-project
+      project: default
       source:
-        repoURL: https://github.com/sainarendrapanga04/argocd-example-apps.git
-        targetRevision: master
-        path: '{{path}}'
+        repoURL: https://github.com/sainarendrapanga04/app-gitops.git
+        targetRevision: main
+        path: apps/{{app}}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{namespace}}'
+        namespace: dev
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
