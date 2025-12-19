@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: stg-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - app: app1
+          - app: app2
+
+  template:
+    metadata:
+      name: stg-{{app}}
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/sainarendrapanga04/app-gitops.git
+        targetRevision: main
+        path: apps/{{app}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: stg
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
